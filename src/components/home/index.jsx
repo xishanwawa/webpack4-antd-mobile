@@ -4,9 +4,12 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'antd';
 import request from "reqwest";
+import { Button, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
 
+function successToast() {
+  Toast.success('Load success !!!', 1);
+}
 
 //导入UI组件
 class Home extends React.Component {
@@ -19,14 +22,20 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    Toast.loading('Loading...', 30, () => {
+      console.log('Load complete !!!');
+    });
 
+    setTimeout(() => {
+      Toast.hide();
+    }, 3000);
   }
 
-  getClickData = ()=>{
+  getClickData = () => {
     request({
       url: '/api/index',
-      method: 'get', 
-      error: function (err) { }, 
+      method: 'get',
+      error: function (err) { },
       success: function (resp) {
         debugger
       }
@@ -35,8 +44,11 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button type="primary" onClick ={this.getClickData}>home</Button>
+      <div sytle={{width:"100%"}}>
+        <WingBlank>
+          <Button onClick={successToast}>success</Button><WhiteSpace />
+          <Button disabled>success disabled</Button><WhiteSpace />
+        </WingBlank>
       </div>
     )
   }

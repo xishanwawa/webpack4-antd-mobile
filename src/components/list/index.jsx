@@ -4,9 +4,11 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'antd';
 import request from "reqwest";
+import { NavBar, Icon, List } from 'antd-mobile';
 
+const Item = List.Item;
+const Brief = Item.Brief;
 
 //导入UI组件
 class Home extends React.Component {
@@ -22,11 +24,11 @@ class Home extends React.Component {
 
   }
 
-  getClickData = ()=>{
+  getClickData = () => {
     request({
       url: '/api/index',
-      method: 'get', 
-      error: function (err) { }, 
+      method: 'get',
+      error: function (err) { },
       success: function (resp) {
         debugger
       }
@@ -35,8 +37,30 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button type="primary" onClick ={this.getClickData}>list</Button>
+      <div sytle={{ width: "100%" }}>
+        <NavBar
+          mode="light"
+          icon={<Icon type="left" />}
+          onLeftClick={() => console.log('onLeftClick')}
+          rightContent={[
+            <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
+            <Icon key="1" type="ellipsis" />,
+          ]}
+        >NavBar</NavBar>
+        <List renderHeader={() => 'Icon in the left'}>
+          <Item
+            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+            arrow="horizontal"
+            onClick={() => { }}
+          >My wallet</Item>
+          <Item
+            thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
+            onClick={() => { }}
+            arrow="horizontal"
+          >
+            My Cost Ratio
+        </Item>
+        </List>
       </div>
     )
   }

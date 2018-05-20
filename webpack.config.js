@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 //代理转发地址
 let target = "http://localhost:8007";
 
@@ -38,14 +37,6 @@ module.exports = {
                 loader: "style-loader"
             }, {
                 loader: "css-loader"
-            }, {
-                loader: "postcss-loader",
-                options: {
-                    sourceMap: true,
-                    config: {
-                        path: 'postcss.config.js'  // 这个得在项目根目录创建此文件
-                    }
-                }
             }, {
                 loader: `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(theme)}}`
             }]

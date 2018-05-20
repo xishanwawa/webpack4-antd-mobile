@@ -15,10 +15,10 @@ module.exports = {
         chunkFilename: '[name].[chunkhash:8].chunk.js'
     },
     externals: {
-		react: 'React',
-		'react-dom': 'ReactDOM',
-		immutable: 'Immutable'
-	},
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        immutable: 'Immutable'
+    },
     devtool: 'cheap-module-source-map',
     module: {
         rules: [{
@@ -34,14 +34,6 @@ module.exports = {
                 loader: "style-loader"
             }, {
                 loader: "css-loader"
-            }, {
-                loader: "postcss-loader",
-                options: {
-                    sourceMap: true,
-                    config: {
-                        path: 'postcss.config.js'  // 这个得在项目根目录创建此文件
-                    }
-                }
             }, {
                 loader: "less-loader"
             }]

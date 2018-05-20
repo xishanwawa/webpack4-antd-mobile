@@ -8,12 +8,6 @@
     "plugins": [
         "transform-object-assign",
         "transform-decorators-legacy",
-        [
-            "import",
-            {
-                "libraryName": "antd",
-                "style": true
-            }
-        ]
+        ["import", {"libraryName": "antd-mobile", "style": true}]
     ]
 }
