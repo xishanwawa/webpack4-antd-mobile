@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import request from "reqwest";
-import { Button, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
+import { Button, WhiteSpace, WingBlank, Toast, SwipeAction } from 'antd-mobile';
 
 function successToast() {
   Toast.success('Load success !!!', 1);
