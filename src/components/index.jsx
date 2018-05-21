@@ -18,8 +18,7 @@ class Index extends React.Component {
 
   render() {
     return (
-      <div sytle={{width:"100%"}}>
-        <Link to='/'>主页</Link><Link to='/list'>列表</Link>
+      <div>
         {this.props.children || "index"}
       </div>
     )

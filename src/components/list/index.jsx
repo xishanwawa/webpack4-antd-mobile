@@ -21,19 +21,18 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-
   }
 
-  getClickData = () => {
-    request({
-      url: '/api/index',
-      method: 'get',
-      error: function (err) { },
-      success: function (resp) {
-        debugger
-      }
-    })
-  }
+  // getClickData = () => {
+  //   request({
+  //     url: '/api/index',
+  //     method: 'get',
+  //     error: function (err) { },
+  //     success: function (resp) {
+  //       debugger
+  //     }
+  //   })
+  // }
 
   render() {
     return (
