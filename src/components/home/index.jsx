@@ -167,7 +167,7 @@ class Home extends React.Component {
         icon={<Icon type="left" />}
         onLeftClick={() => console.log('onLeftClick')}
       >报表</NavBar>
-      <div style={{ padding: "0 10 0" }}>
+      <div style={{ padding: "0 20 0" }}>
         <ReactEcharts option={this.getOption()} />
       </div>
     </div>

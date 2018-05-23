@@ -7,7 +7,7 @@ module.exports = {
     target: 'web',
     entry: {
         main: ['babel-polyfill', './src/index.js'],
-        vendor: ['redux', 'react-redux', 'react-router', 'react-router-redux', 'redux-thunk']
+        vendor: ['redux', 'react-redux', 'react-router', 'redux-thunk']
     },
     output: {
         filename: '[name].[chunkhash:8].js',
