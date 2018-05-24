@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
+// ExtractTextPlugin = require("extract-text-webpack-plugin"),
+//     CssSourcemapPlugin = require("css-sourcemaps-webpack-plugin"),
+
 module.exports = {
     target: 'web',
     entry: {
@@ -74,7 +77,9 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
-        })
+        }),
+        // new CssSourcemapPlugin(),
+        // new ExtractTextPlugin("[name].[hash].css")
     ],
     mode: "production",
     optimization: {
@@ -83,7 +88,8 @@ module.exports = {
                 commons: {
                     test: /[\\/]node_modules[\\/]/,
                     name: "vendors",
-                    chunks: "all"
+                    chunks: "all",
+                    maxAsyncRequests: 1024000
                 }
             }
         }
