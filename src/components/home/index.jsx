@@ -4,20 +4,21 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory, Link } from 'react-router'
 import request from "reqwest";
-import { NavBar, Icon, TabBar, PullToRefresh, SwipeAction, SearchBar, Carousel } from 'antd-mobile';
+import { NavBar, Button, Icon, TabBar, PullToRefresh, SwipeAction, SearchBar, Carousel, Grid } from 'antd-mobile';
 import ReactEcharts from 'echarts-for-react';
-
+import './index.less'
 function genData() {
-  const dataArr = [];
-  for (let i = 0; i < 20; i++) {
-    dataArr.push(i);
-  }
+  const dataArr = Array.from(new Array(20)).map((item, i) => ({
+    name: "name" + i
+  }));
+
   return dataArr;
 }
 
 //导入UI组件
-class Home extends React.Component {
+class Index extends React.Component {
 
   constructor(props) {
     super(props);
@@ -45,11 +46,6 @@ class Home extends React.Component {
 
   renderList() {
     return <div>
-      <NavBar
-        mode="light"
-        icon={<Icon type="left" />}
-        onLeftClick={() => console.log('onLeftClick')}
-      >通讯录</NavBar>
       <SearchBar placeholder="搜索..." maxLength={8} />
       <PullToRefresh
         ref={el => this.ptr = el}
@@ -67,12 +63,12 @@ class Home extends React.Component {
           }, 1000);
         }}
       >
-        {this.state.data.map(i => this.renderListCell(i))}
+        {this.state.data.map((item, i) => this.renderListCell(item, i))}
       </PullToRefresh>
     </div>
   }
 
-  renderListCell(i) {
+  renderListCell(item, i) {
     return <SwipeAction
       key={i}
       style={{ backgroundColor: 'gray' }}
@@ -105,18 +101,30 @@ class Home extends React.Component {
     </SwipeAction>
   }
 
+  //跳转传值
+  goPush = () => {
+    let data = { id: 3, name: "yangtmm", age: 18 }
+    //传值query与state都可以
+    browserHistory.push({
+      pathname: '/list',
+      query: data,
+      state: data
+    })
+  }
+
   renderFunction() {
+
+    let data = { id: 3, name: "yangtmm", age: 18 }
+    const data1 = Array.from(new Array(7)).map(() => ({
+      icon: 'https://gw.alipayobjects.com/zos/rmsportal/WXoqXTHrSnRcUwEaQgXJ.png',
+    }));
     return <div>
-      <NavBar
-        mode="light"
-        icon={<Icon type="left" />}
-        onLeftClick={() => console.log('onLeftClick')}
-      >业务</NavBar>
       <Carousel
         autoplay={true}
         infinite
-        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-        afterChange={index => console.log('slide to', index)}
+        style={{ marginBottom: 10 }}
+        beforeChange={(from, to) => { }}
+        afterChange={index => { }}
       >
         {this.state.imgdata.map(val => (
           <a
@@ -137,6 +145,20 @@ class Home extends React.Component {
           </a>
         ))}
       </Carousel>
+      <Grid data={data1}
+        columnNum={4}
+        renderItem={dataItem => (
+          <div>
+            <Link to={{ pathname: `/list`, state: data }}>
+              <img src={dataItem.icon} style={{ width: 30, height: 30 }} alt="" />
+              <div style={{ marginTop: 10 }}>
+                <span style={{ color: '#888', fontSize: 12 }}>链接传值</span>
+              </div>
+            </Link>
+          </div>
+        )}
+      />
+      <Button onClick={this.goPush} >按钮跳转</Button>
     </div>
   }
 
@@ -162,12 +184,7 @@ class Home extends React.Component {
 
   renderReportForm() {
     return <div>
-      <NavBar
-        mode="light"
-        icon={<Icon type="left" />}
-        onLeftClick={() => console.log('onLeftClick')}
-      >报表</NavBar>
-      <div style={{ padding: "0 20 0" }}>
+      <div style={{ padding: "0 10 0" }}>
         <ReactEcharts option={this.getOption()} />
       </div>
     </div>
@@ -186,6 +203,9 @@ class Home extends React.Component {
   render() {
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+        <NavBar
+          mode="light"
+        >home</NavBar>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -193,7 +213,7 @@ class Home extends React.Component {
           hidden={false}
         >
           <TabBar.Item
-            title="看板"
+            title="Form"
             key="Life"
             icon={<div style={{
               width: '22px',
@@ -235,7 +255,7 @@ class Home extends React.Component {
               }}
               />
             }
-            title="业务"
+            title="Func"
             key="Koubei"
             selected={this.state.selectedTab === 'redTab'}
             onPress={() => {
@@ -263,7 +283,7 @@ class Home extends React.Component {
               }}
               />
             }
-            title="通讯录"
+            title="List"
             key="Friend"
             selected={this.state.selectedTab === 'greenTab'}
             onPress={() => {
@@ -287,7 +307,7 @@ function mapStateToProps(state) {
 }
 
 module.exports = connect(mapStateToProps, {
-})(Home)
+})(Index)
 
 
 

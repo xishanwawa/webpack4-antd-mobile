@@ -4,6 +4,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory, Link } from 'react-router'
 import request from "reqwest";
 import { SwipeAction, NavBar, Icon, List } from 'antd-mobile';
 
@@ -11,16 +12,19 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 //导入UI组件
-class Home extends React.Component {
+class Index extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
-      data: []
+      data: [],
+      urlData: this.props.location.state
     }
   }
 
   componentDidMount() {
+    var data = this.props.location.state;
   }
 
   // getClickData = () => {
@@ -40,7 +44,7 @@ class Home extends React.Component {
         <NavBar
           mode="light"
           icon={<Icon type="left" />}
-          onLeftClick={() => console.log('onLeftClick')}
+          onLeftClick={() => browserHistory.goBack()}
           rightContent={[
             <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
             <Icon key="1" type="ellipsis" />,
@@ -98,7 +102,7 @@ class Home extends React.Component {
             Have left and right buttons
       </List.Item>
         </SwipeAction>
-
+      <div>姓名：{this.state.urlData.name}, 年龄：{this.state.urlData.age}</div>
       </div>
     )
   }
@@ -112,7 +116,7 @@ function mapStateToProps(state) {
 }
 
 module.exports = connect(mapStateToProps, {
-})(Home)
+})(Index)
 
 
 

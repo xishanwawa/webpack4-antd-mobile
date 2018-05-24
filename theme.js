@@ -1,4 +1,4 @@
 module.exports = {
-    "brand-primary": "red",
+    //"brand-primary": "#690",
     "color-text-base":  "#333"
 }
